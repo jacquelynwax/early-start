@@ -16,6 +16,7 @@ router.get('/:childId', (req, res, next) => {
 })
 
 /* create a new attention entry for a child */
+// *** when I hook this up to front end, I need to send decide how to make association -- send it with req.body or isolate all elements back here and drop them into create
 router.post('/:childId', (req, res, next) => {
   Attention.create(req.body)
     .then(newAttentionEntry => {
@@ -32,7 +33,7 @@ router.put('/:attentionId', (req, res, next) => {
     }, returning: true
   })
   .then(updatedAttentionEntry => {
-    res.json(updatedAttentionEntry)
+    res.json(updatedAttentionEntry[1][0])
   })
   .catch(next)
 })
